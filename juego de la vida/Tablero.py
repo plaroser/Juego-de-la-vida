@@ -16,16 +16,30 @@ class Tablero(object):
     NVECINOS_VOLVER_ACTIVA = 3
     MIN_CONTINUA_VIVA = 2
     MAX_CONTINUA_VIVA = 3
+    
+    def counter_label(label):
+        counter = 0
+        def count():
+            global counter
+            counter += 1
+            label.config(text=str(counter))
+            label.after(1000, count)
+        count()
 
     def crearTablero(self,filas,columnas):
         for x in range(filas):
             for y in range(columnas):
-                    self.tablero[x][y] = Checkbutton(master, text="").grid(row=x,column=y)
+                    self.tablero[x][y] = Checkbutton(master, text="")
+                    self.tablero[x][y].grid(row=x,column=y)
         b = Button(master, text="OKkkkkkkk")
-        b.grid(row=x+1,column=0, columnspan = 10)
+        b.grid(row=x+1,column=0, columnspan = 5)
         b2 = Button(master, text="Hola a todos esto es una prueba")
-        b2.grid(row=x+2,column=0, columnspan = 10)
-        mainloop()
+        b2.grid(row=x+2,column=0, columnspan = 5)
+
+    '''def imprimirTablero(self, matriz):
+        for x in range(filas):
+            for y in range(columnas):
+                self.tablero[x][y]=matriz[x][y]'''
 
     def __init__(self, filas, columnas):
         '''
@@ -34,7 +48,12 @@ class Tablero(object):
         self.filas = filas
         self.columnas = columnas   
         self.tablero = [[0 for x in range(filas)] for y in range(columnas)] 
+        self.check= [[0 for x in range(filas)] for y in range(columnas)]
         self.crearTablero(columnas,filas)
+        #Seleccionar una casilla
+        self.tablero[1][1].select()
+        
+        mainloop()
 
 
     def activar(self,fila,columna):
