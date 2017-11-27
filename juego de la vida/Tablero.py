@@ -3,7 +3,7 @@ from tkinter import *
 
 master = Tk()
 #frame = Tk.frame(master)
-master.title("Counting Seconds")
+master.title("Prueba")
 #frame.pack()
 
 
@@ -21,9 +21,10 @@ class Tablero(object):
         for x in range(filas):
             for y in range(columnas):
                     self.tablero[x][y] = Checkbutton(master, text="").grid(row=x,column=y)
-        b=Button(master, text ="Hello").pack(side="bottom", fill="x")
-        #b.pack()
-
+        b = Button(master, text="OKkkkkkkk")
+        b.grid(row=x+1,column=0, columnspan = 10)
+        b2 = Button(master, text="Hola a todos esto es una prueba")
+        b2.grid(row=x+2,column=0, columnspan = 10)
         mainloop()
 
     def __init__(self, filas, columnas):

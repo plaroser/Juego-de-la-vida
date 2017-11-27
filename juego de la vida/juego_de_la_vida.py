@@ -1,8 +1,7 @@
 import Tablero
 from tkinter import *
-master = Tk() 
 if __name__ == '__main__':
-    t = Tablero.Tablero(50,20)
+    t = Tablero.Tablero(10,10)
    
     #mainloop()
     '''
@@ -12,4 +11,4 @@ if __name__ == '__main__':
     
     t.evolucion()
     '''
-    print(str(t))
+    #print(str(t))
