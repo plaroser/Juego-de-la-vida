@@ -1,3 +1,9 @@
+'''
+Created on 2 de nov. de 2017
+
+@author: SergioPla
+'''
+
 from tkinter import *
 #import tkinter
 
@@ -18,25 +24,22 @@ class VistaTablero(object):
     def crearTablero(self,filas,columnas):
             for x in range(filas):
                 for y in range(columnas):
-                        self.tablero[x][y] = Checkbutton(master, text="")
-                        self.tablero[x][y].grid(row=x,column=y)
+                        self.casillas[x][y] = Checkbutton(master, text="")
+                        self.casillas[x][y].grid(row=x,column=y)
             b = Button(master, text="OKkkkkkkk")
             b.grid(row=x+1,column=0, columnspan = 5)
             b2 = Button(master, text="Hola a todos esto es una prueba")
             b2.grid(row=x+2,column=0, columnspan = 5)
 
-    '''def imprimirTablero(self, matriz):
-        for x in range(filas):
-            for y in range(columnas):
-                self.tablero[x][y]=matriz[x][y]'''
-   
+
     def __init__(self, filas, columnas):
         '''
         Constructor
         '''
+        self.casillas =  [[0 for x in range(filas)] for y in range(columnas)] 
         self.crearTablero(columnas,filas)
         #Seleccionar una casilla
-        self.tablero[1][1].select()
+        self.casillas[1][1].select()
         
         mainloop()
    

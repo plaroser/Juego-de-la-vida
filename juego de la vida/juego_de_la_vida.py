@@ -1,7 +1,7 @@
-import Tablero
+import VistaTablero
 from tkinter import *
 if __name__ == '__main__':
-    t = Tablero.Tablero(10,10)
+    t = VistaTablero.VistaTablero(10,10)
    
     #mainloop()
     '''

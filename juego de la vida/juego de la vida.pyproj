@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ControladorTablero.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="juego_de_la_vida.py" />
     <Compile Include="Tablero.py">
       <SubType>Code</SubType>
