@@ -9,11 +9,12 @@ class Tablero(object):
     '''
     classdocs
     '''
-    ACTIVA = 1
-    INACTIVA = 0
+    ACTIVA = True
+    INACTIVA = False
     NVECINOS_VOLVER_ACTIVA = 3
     MIN_CONTINUA_VIVA = 2
     MAX_CONTINUA_VIVA = 3
+    tablero =  [[0 for x in range(100)] for y in range(100)]
 
     def __init__(self, filas, columnas):
         '''
@@ -21,7 +22,7 @@ class Tablero(object):
         '''
         self.filas = filas
         self.columnas = columnas   
-        self.tablero =  [[0 for x in range(filas)] for y in range(columnas)] 
+        self.tablero =  [[False for x in range(filas)] for y in range(columnas)] 
         
     def activar(self,fila,columna):
         self.tablero[fila][columna] = Tablero.ACTIVA
@@ -44,7 +45,7 @@ class Tablero(object):
                 y = columna + j
     
                 if (self.posicionValida(x,y)):
-                    if (self.tablero[x][y] == Tablero.ACTIVA and (i!=0 or j!=0)):
+                    if (tablero[x][y] == Tablero.ACTIVA and (i!=0 or j!=0)):
                         contador = contador + 1
                     
                 
@@ -52,7 +53,7 @@ class Tablero(object):
         return contador
     
     def getValue(self, fila, columna): 
-        return self.tablero[fila][columna]     
+        return tablero[fila][columna]     
      
     def calcularProximoEstado(self,fila,columna):
         vecinosVivos = self.calcularNumeroVecinosVivos(fila, columna)
@@ -71,32 +72,22 @@ class Tablero(object):
         return res
  
     def evolucion(self):
-        copia = [[self.tablero[x][y] for x in range(self.filas)] for y in range(self.columnas)]
+        copia = [[tablero[x][y] for x in range(self.filas)] for y in range(self.columnas)]
         
-        for i in range(len(self.tablero)):
-            for j in range(len(self.tablero)):
+        for i in range(len(tablero)):
+            for j in range(len(tablero)):
                 copia[i][j] = self.calcularProximoEstado(i,j)
                 print(str(self.calcularProximoEstado(i,j)))
         
-        self.tablero = copia;  
+        tablero = copia;  
         
     def __str__(self):
         res = ""
-        for i in range(len(self.tablero)):
-            for j in range(len(self.tablero)):
+        for i in range(len(tablero)):
+            for j in range(len(tablero)):
                 res = res + " " + str(self.getValue(i,j))
             
             res = res + "\n"    
 
         return res
     
-    
-if __name__ == '__main__':
-    t = Tablero(5,5)
-    t.activar(1,1)
-    t.activar(2,1)
-    t.activar(3,1)
-    
-    t.evolucion()
-    print(str(t))
-

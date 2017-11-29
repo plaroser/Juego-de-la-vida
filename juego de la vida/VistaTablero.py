@@ -9,7 +9,13 @@ from tkinter import *
 
 master = Tk()
 master.title("Juego de la vida By SergioPla")
+import Tablero
 class VistaTablero(object):
+    casillas =  [[0 for x in range(0)] for y in range(0)] 
+    variables =  [[False for x in range(0)] for y in range(0)] 
+
+    filas = 0
+    columnas=0
     '''
         def counter_label(label):
             counter = 0
@@ -22,24 +28,39 @@ class VistaTablero(object):
     '''
     
     def crearTablero(self,filas,columnas):
-            for x in range(filas):
-                for y in range(columnas):
-                        self.casillas[x][y] = Checkbutton(master, text="")
-                        self.casillas[x][y].grid(row=x,column=y)
-            b = Button(master, text="OKkkkkkkk")
-            b.grid(row=x+1,column=0, columnspan = 5)
-            b2 = Button(master, text="Hola a todos esto es una prueba")
-            b2.grid(row=x+2,column=0, columnspan = 5)
+        self.casillas =  [[0 for x in range(filas)] for y in range(columnas)] 
+        Tablero.Tablero.tablero =  [[False for x in range(filas)] for y in range(columnas)] 
+
+        for x in range(filas):
+            for y in range(columnas):
+                Tablero.Tablero.tablero[x][y]=BooleanVar()
+                self.casillas[x][y] = Checkbutton(master, text="", variable=Tablero.Tablero.tablero[x][y])
+                #print(str(Tablero.Tablero.tablero[x][y].get()))
+                self.casillas[x][y].grid(row=x,column=y)
+        self.bParar = Button(master, text="Parar")
+        self.bParar.grid(row=x+1,column=0, columnspan = 4)
+        self.bIniciar = Button(master, text="Iniciar")
+        self.bIniciar.grid(row=x+2,column=0, columnspan = 4)
+        l = Label(master,text="Ciclos de vida:")
+        l.grid(row=x+3,column=0, columnspan = 4)
+        self.l2= Label(master,text="Ejemplo de ciclos")
+        self.l2.grid(row=x+3,column=4, columnspan = 4)
+        lMilisegundos = Label(master,text="Milisegundos:")
+        lMilisegundos.grid(row=x+4,column=0, columnspan = 4)
+        self.tbMilisegundos = Entry(master, text="1000")
+        self.tbMilisegundos.grid(row=x+4,column=4, columnspan = 4)
 
 
     def __init__(self, filas, columnas):
         '''
         Constructor
         '''
-        self.casillas =  [[0 for x in range(filas)] for y in range(columnas)] 
+
+        filas = filas
+        columnas=columnas
         self.crearTablero(columnas,filas)
         #Seleccionar una casilla
-        self.casillas[1][1].select()
+        self.casillas[0][0].select()
         
         mainloop()
    
