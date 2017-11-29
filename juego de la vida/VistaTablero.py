@@ -11,8 +11,7 @@ master = Tk()
 master.title("Juego de la vida By SergioPla")
 import Tablero
 class VistaTablero(object):
-    casillas =  [[0 for x in range(0)] for y in range(0)] 
-    variables =  [[False for x in range(0)] for y in range(0)] 
+
 
     filas = 0
     columnas=0
@@ -28,9 +27,9 @@ class VistaTablero(object):
     '''
     
     def crearTablero(self,filas,columnas):
+        self.filas=filas
         self.casillas =  [[0 for x in range(filas)] for y in range(columnas)] 
         Tablero.Tablero.tablero =  [[False for x in range(filas)] for y in range(columnas)] 
-
         for x in range(filas):
             for y in range(columnas):
                 Tablero.Tablero.tablero[x][y]=BooleanVar()
@@ -56,8 +55,7 @@ class VistaTablero(object):
         Constructor
         '''
 
-        filas = filas
-        columnas=columnas
+
         self.crearTablero(columnas,filas)
         #Seleccionar una casilla
         self.casillas[0][0].select()

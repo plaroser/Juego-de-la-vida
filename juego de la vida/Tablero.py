@@ -57,7 +57,7 @@ class Tablero(object):
      
     def calcularProximoEstado(self,fila,columna):
         vecinosVivos = self.calcularNumeroVecinosVivos(fila, columna)
-        res = 0
+        res = False
         if (self.getValue(fila, columna) == Tablero.INACTIVA):
             if (vecinosVivos == Tablero.NVECINOS_VOLVER_ACTIVA):
                 res = Tablero.ACTIVA
@@ -72,12 +72,12 @@ class Tablero(object):
         return res
  
     def evolucion(self):
-        copia = [[tablero[x][y] for x in range(self.filas)] for y in range(self.columnas)]
-        
+        copia = [[self.tablero[x][y] for x in range(self.filas)] for y in range(self.columnas)]
+        #copia = self.tablero
         for i in range(len(tablero)):
             for j in range(len(tablero)):
                 copia[i][j] = self.calcularProximoEstado(i,j)
-                print(str(self.calcularProximoEstado(i,j)))
+                #print(str(self.calcularProximoEstado(i,j)))
         
         tablero = copia;  
         
