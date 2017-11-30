@@ -7,24 +7,13 @@ Created on 2 de nov. de 2017
 from tkinter import *
 #import tkinter
 import Tablero
+import ControladorTablero
 
 master = Tk()
 master.title("Juego de la vida By SergioPla")
 
 class VistaTablero(object):
 
-
-    
-    '''
-        def counter_label(label):
-            counter = 0
-            def count():
-                global counter
-                counter += 1
-                label.config(text=str(counter))
-                label.after(1000, count)
-            count()
-    '''
     def leerTablero(self):
         return self.tablero
 
@@ -62,5 +51,8 @@ class VistaTablero(object):
         self.crearTablero(columnas,filas)
         #Seleccionar una casilla
         self.casillas[0][0].select()
-        mainloop()
-   
+        #mainloop()
+
+    def getMaster(self):
+       return master
+ 

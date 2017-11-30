@@ -6,12 +6,14 @@ if __name__ == '__main__':
     #c.crearTablero(10,10)
     c.leerTablero()
     c.leerTablero()
+    c.siguienteEstado()
     '''ControladorTablero.ControladorTablero.siguienteEstado()
     ControladorTablero.ControladorTablero.siguienteEstado()
 
     ControladorTablero.ControladorTablero.siguienteEstado()
     ControladorTablero.ControladorTablero.siguienteEstado()'''
-    #mainloop()
+    
+    mainloop()
     '''
     t.activar(1,1)
     t.activar(2,1)

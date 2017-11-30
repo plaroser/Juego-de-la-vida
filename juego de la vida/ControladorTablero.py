@@ -5,6 +5,7 @@ Created on 21 de nov. de 2017
 '''
 import VistaTablero
 import Tablero
+from tkinter import *
 
 class ControladorTablero():
     counter=0
@@ -14,6 +15,9 @@ class ControladorTablero():
     def __init__(self, filas, columnas):
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
+        #==========Boton provisional==========
+        bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.siguienteEstado())
+        bIniciar.grid(row=filas+5,column=0, columnspan = 2)
 
     def counter_label(label):
         counter = 0
