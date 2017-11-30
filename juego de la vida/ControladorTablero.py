@@ -10,6 +10,11 @@ class ControladorTablero():
     counter=0
     t = 0
     v=0
+
+    def __init__(self, filas, columnas):
+        self.tablero = Tablero.Tablero(filas, columnas);
+        self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
+
     def counter_label(label):
         counter = 0
         def count():
@@ -19,21 +24,20 @@ class ControladorTablero():
             label.after(1000, count)
         count()
 
-    def crearTablero(filas,columnas):
-        Tablero.Tablero(filas,columnas)
-        VistaTablero.VistaTablero(filas,columnas)
-        VistaTablero.VistaTablero.filas=filas
-        VistaTablero.VistaTablero.columnas=columnas
-        
-
-    def leerTablero():
-        print(str(VistaTablero.VistaTablero.columnas))
+    def leerTablero(self):
+        #print(str(self.vista.columnas))
+        #print(str(False))
         salida = ""
-        for x in range(VistaTablero.VistaTablero.filas):
+        for x in range(self.vista.filas):
             salida=salida+"\n"
-            for y in range(VistaTablero.VistaTablero.columnas):
-                    salida=salida+" "+str(Tablero.Tablero.tablero[x][y].get())
-        print(salida)
+            #print(str(self.vista.columnas))
+            for y in range(self.vista.columnas):
+                    self.tablero.tablero[x][y]=self.vista.tablero[x][y].get()
+                    #print("blabla")
+                    salida=salida+" "+str(self.tablero.getValue(x,y))
+       # print(salida)
+        self.tablero.evolucion()
+        print(self.tablero)
 
-    def siguienteEstado():
-         Tablero.Tablero.evolucion(Tablero.Tablero.tablero)
+    def siguienteEstado(self):
+         self.tablero.evolucion()

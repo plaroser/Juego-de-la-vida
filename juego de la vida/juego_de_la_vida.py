@@ -1,12 +1,16 @@
 import ControladorTablero 
 from tkinter import *
 if __name__ == '__main__':
-    ControladorTablero.ControladorTablero.crearTablero(10,10)
-    ControladorTablero.ControladorTablero.leerTablero()
-    ControladorTablero.ControladorTablero.siguienteEstado();
-    ControladorTablero.ControladorTablero.siguienteEstado();
-    ControladorTablero.ControladorTablero.siguienteEstado();
-    ControladorTablero.ControladorTablero.siguienteEstado();
+    c = ControladorTablero.ControladorTablero(10,10)
+    #c.
+    #c.crearTablero(10,10)
+    c.leerTablero()
+    c.leerTablero()
+    '''ControladorTablero.ControladorTablero.siguienteEstado()
+    ControladorTablero.ControladorTablero.siguienteEstado()
+
+    ControladorTablero.ControladorTablero.siguienteEstado()
+    ControladorTablero.ControladorTablero.siguienteEstado()'''
     #mainloop()
     '''
     t.activar(1,1)

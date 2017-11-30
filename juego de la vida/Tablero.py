@@ -45,15 +45,13 @@ class Tablero(object):
                 y = columna + j
     
                 if (self.posicionValida(x,y)):
-                    if (tablero[x][y] == Tablero.ACTIVA and (i!=0 or j!=0)):
+                    if (self.tablero[x][y] == Tablero.ACTIVA and (i!=0 or j!=0)):
                         contador = contador + 1
-                    
-                
-        
+
         return contador
     
     def getValue(self, fila, columna): 
-        return tablero[fila][columna]     
+        return self.tablero[fila][columna]     
      
     def calcularProximoEstado(self,fila,columna):
         vecinosVivos = self.calcularNumeroVecinosVivos(fila, columna)
@@ -73,18 +71,21 @@ class Tablero(object):
  
     def evolucion(self):
         copia = [[self.tablero[x][y] for x in range(self.filas)] for y in range(self.columnas)]
-        #copia = self.tablero
-        for i in range(len(tablero)):
-            for j in range(len(tablero)):
+        
+        for i in range(len(self.tablero)):
+            for j in range(len(self.tablero)):
                 copia[i][j] = self.calcularProximoEstado(i,j)
                 #print(str(self.calcularProximoEstado(i,j)))
         
-        tablero = copia;  
+        self.tablero = copia;   
+
+    def evolucion2(self):
+        print(self.columnas);
         
     def __str__(self):
         res = ""
-        for i in range(len(tablero)):
-            for j in range(len(tablero)):
+        for i in range(len(self.tablero)):
+            for j in range(len(self.tablero)):
                 res = res + " " + str(self.getValue(i,j))
             
             res = res + "\n"    

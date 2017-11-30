@@ -6,15 +6,15 @@ Created on 2 de nov. de 2017
 
 from tkinter import *
 #import tkinter
+import Tablero
 
 master = Tk()
 master.title("Juego de la vida By SergioPla")
-import Tablero
+
 class VistaTablero(object):
 
 
-    filas = 0
-    columnas=0
+    
     '''
         def counter_label(label):
             counter = 0
@@ -25,15 +25,17 @@ class VistaTablero(object):
                 label.after(1000, count)
             count()
     '''
-    
+    def leerTablero(self):
+        return self.tablero
+
     def crearTablero(self,filas,columnas):
         self.filas=filas
         self.casillas =  [[0 for x in range(filas)] for y in range(columnas)] 
-        Tablero.Tablero.tablero =  [[False for x in range(filas)] for y in range(columnas)] 
+        self.tablero =  [[False for x in range(filas)] for y in range(columnas)] 
         for x in range(filas):
             for y in range(columnas):
-                Tablero.Tablero.tablero[x][y]=BooleanVar()
-                self.casillas[x][y] = Checkbutton(master, text="", variable=Tablero.Tablero.tablero[x][y])
+                self.tablero[x][y]=BooleanVar()
+                self.casillas[x][y] = Checkbutton(master, text="", variable=self.tablero[x][y])
                 #print(str(Tablero.Tablero.tablero[x][y].get()))
                 self.casillas[x][y].grid(row=x,column=y)
         self.bParar = Button(master, text="Parar")
@@ -50,15 +52,15 @@ class VistaTablero(object):
         self.tbMilisegundos.grid(row=x+4,column=4, columnspan = 4)
 
 
-    def __init__(self, filas, columnas):
+    def __init__(self, filas, columnas, tablero):
         '''
         Constructor
         '''
-
-
+        self.tablero = tablero
+        self.filas=filas
+        self.columnas = columnas
         self.crearTablero(columnas,filas)
         #Seleccionar una casilla
         self.casillas[0][0].select()
-        
         mainloop()
    
