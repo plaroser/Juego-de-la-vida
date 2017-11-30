@@ -31,14 +31,11 @@ class VistaTablero(object):
         self.bParar.grid(row=x+1,column=0, columnspan = 4)
         self.bIniciar = Button(master, text="Iniciar")
         self.bIniciar.grid(row=x+2,column=0, columnspan = 4)
-        l = Label(master,text="Ciclos de vida:")
-        l.grid(row=x+3,column=0, columnspan = 4)
-        self.l2= Label(master,text="Ejemplo de ciclos")
-        self.l2.grid(row=x+3,column=4, columnspan = 4)
-        lMilisegundos = Label(master,text="Milisegundos:")
-        lMilisegundos.grid(row=x+4,column=0, columnspan = 4)
-        self.tbMilisegundos = Entry(master, text="1000")
-        self.tbMilisegundos.grid(row=x+4,column=4, columnspan = 4)
+        
+        lVivos = Label(master,text="Total vivos:")
+        lVivos.grid(row=x+4,column=0, columnspan = 4)
+        self.lbVivos = Label(master, text="0")
+        self.lbVivos.grid(row=x+4,column=4, columnspan = 4)
     
     def imprimirTablero(self,tablero):
         for x in range(self.filas):
@@ -49,8 +46,16 @@ class VistaTablero(object):
                     self.casillas[x][y].deselect()
                 #    print(tablero[x][y])
                 #self.casillas[x][y].select()
+                self.setVivos()
     
     
+    def setVivos(self):
+        contador = 0
+        for x in range(self.filas):
+            for y in range(self.columnas):
+                if self.tablero[x][y].get()==True:
+                    contador=contador+1
+        self.lbVivos.config(text=str(contador))
 
     def __init__(self, filas, columnas, tablero):
         '''

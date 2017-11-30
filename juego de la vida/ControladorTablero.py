@@ -6,9 +6,10 @@ Created on 21 de nov. de 2017
 import VistaTablero
 import Tablero
 from tkinter import *
+import time
+time.sleep(5) 
 
 class ControladorTablero():
-    counter=0
     t = 0
     v=0
 
@@ -17,17 +18,19 @@ class ControladorTablero():
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
         #==========Boton provisional==========
         bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.siguienteEstado)
-        bIniciar.grid(row=filas+5,column=0, columnspan = 2)
+        bIniciar.grid(row=filas+6,column=0, columnspan = 2)
+        self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
+        self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 4)
+        self.counter=0
         #mainloop()
+        #self.bucle()
 
-    def counter_label(label):
-        counter = 0
-        def count():
-            global counter
-            counter += 1
-            label.config(text=str(counter))
-            label.after(1000, count)
-        count()
+    def bucle(self):
+        while True:
+            self.siguienteEstado()
+            time.sleep(1) 
+    
+    
 
     def leerTablero(self):
         #print(str(self.vista.columnas))
