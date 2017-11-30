@@ -16,8 +16,9 @@ class ControladorTablero():
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
         #==========Boton provisional==========
-        bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.siguienteEstado())
+        bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.siguienteEstado)
         bIniciar.grid(row=filas+5,column=0, columnspan = 2)
+        #mainloop()
 
     def counter_label(label):
         counter = 0
@@ -39,9 +40,18 @@ class ControladorTablero():
                     self.tablero.tablero[x][y]=self.vista.tablero[x][y].get()
                     #print("blabla")
                     salida=salida+" "+str(self.tablero.getValue(x,y))
-       # print(salida)
-        self.tablero.evolucion()
+        #print(salida)
+        #self.tablero.evolucion()
         print(self.tablero)
 
+    def asignarTableroAVista(self):
+        for x in range(self.vista.filas):
+            for y in range(self.vista.columnas):
+                self.vista.tablero[x][y].set(self.tablero.tablero[x][y])
+
     def siguienteEstado(self):
+         self.leerTablero()
          self.tablero.evolucion()
+         self.asignarTableroAVista()
+         self.vista.imprimirTablero(self.tablero.tablero)
+         #print("++++")

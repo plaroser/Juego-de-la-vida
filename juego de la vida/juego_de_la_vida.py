@@ -4,9 +4,9 @@ if __name__ == '__main__':
     c = ControladorTablero.ControladorTablero(10,10)
     #c.
     #c.crearTablero(10,10)
-    c.leerTablero()
-    c.leerTablero()
-    c.siguienteEstado()
+    #c.leerTablero()
+    #c.leerTablero()
+    #c.siguienteEstado()
     '''ControladorTablero.ControladorTablero.siguienteEstado()
     ControladorTablero.ControladorTablero.siguienteEstado()
 

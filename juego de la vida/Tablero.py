@@ -74,10 +74,10 @@ class Tablero(object):
         
         for i in range(len(self.tablero)):
             for j in range(len(self.tablero)):
-                copia[i][j] = self.calcularProximoEstado(i,j)
-                #print(str(self.calcularProximoEstado(i,j)))
+                self.tablero[i][j] = self.calcularProximoEstado(i,j)
+                #print((self.tablero))
         
-        self.tablero = copia;   
+        #self.tablero = copia;   
 
     def evolucion2(self):
         print(self.columnas);
@@ -87,8 +87,6 @@ class Tablero(object):
         for i in range(len(self.tablero)):
             for j in range(len(self.tablero)):
                 res = res + " " + str(self.getValue(i,j))
-            
             res = res + "\n"    
-
         return res
     

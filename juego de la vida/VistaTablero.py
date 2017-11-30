@@ -39,7 +39,18 @@ class VistaTablero(object):
         lMilisegundos.grid(row=x+4,column=0, columnspan = 4)
         self.tbMilisegundos = Entry(master, text="1000")
         self.tbMilisegundos.grid(row=x+4,column=4, columnspan = 4)
-
+    
+    def imprimirTablero(self,tablero):
+        for x in range(self.filas):
+            for y in range(self.columnas):
+                if tablero[x][y]==True:
+                    self.casillas[x][y].select()
+                else:
+                    self.casillas[x][y].deselect()
+                #    print(tablero[x][y])
+                #self.casillas[x][y].select()
+    
+    
 
     def __init__(self, filas, columnas, tablero):
         '''
