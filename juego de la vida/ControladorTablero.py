@@ -14,6 +14,15 @@ class ControladorTablero():
     v=0
 
     def __init__(self, filas, columnas):
+        """Constructor
+
+        Crea un tablero con el número de filas y columnas indicado
+
+        Args:
+            self: Instancia actual
+            filas: Filas totales a crear
+            columnas: Columnas totales a 
+        """
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
         #==========Boton provisional==========
@@ -22,39 +31,47 @@ class ControladorTablero():
         self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
         self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 4)
         self.counter=0
-        #mainloop()
-        #self.bucle()
 
-    def bucle(self):
-        while True:
-            self.siguienteEstado()
-            time.sleep(1) 
-    
-    
+       
 
     def leerTablero(self):
-        #print(str(self.vista.columnas))
-        #print(str(False))
+        """Lee el tablero
+
+        Lee el estado actual del la vista del tablerop y lo plasma en el modelo del tablero
+        Args:
+            self: Instancia acual.
+
+        """
         salida = ""
         for x in range(self.vista.filas):
             salida=salida+"\n"
-            #print(str(self.vista.columnas))
             for y in range(self.vista.columnas):
                     self.tablero.tablero[x][y]=self.vista.tablero[x][y].get()
-                    #print("blabla")
                     salida=salida+" "+str(self.tablero.getValue(x,y))
-        #print(salida)
-        #self.tablero.evolucion()
         print(self.tablero)
 
-    def asignarTableroAVista(self):
+    def imprimirTablero(self):
+        """Imprime el tablero
+
+        Lee el estado actual del la vista del tablero y lo plasma en el modelo del tablero
+        Args:
+            self: Instancia acual.
+
+        """
         for x in range(self.vista.filas):
             for y in range(self.vista.columnas):
                 self.vista.tablero[x][y].set(self.tablero.tablero[x][y])
 
     def siguienteEstado(self):
-         self.leerTablero()
-         self.tablero.evolucion()
-         self.asignarTableroAVista()
-         self.vista.imprimirTablero(self.tablero.tablero)
-         #print("++++")
+        """Calcula el siguiente estado del tablero
+
+        Ejecuta todos los metodos necesarios para calcular el siguiente estado del tablero
+
+        Args:
+            self: Instancia acual.
+
+        """
+        self.leerTablero()
+        self.tablero.evolucion()
+        self.imprimirTablero()
+        self.vista.imprimirTablero(self.tablero.tablero)
