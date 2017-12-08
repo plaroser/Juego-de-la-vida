@@ -27,9 +27,9 @@ class ControladorTablero():
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
         #==========Boton provisional==========
         bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.siguienteEstado)
-        bIniciar.grid(row=filas+6,column=0, columnspan = 2)
+        bIniciar.grid(row=filas+6,column=0, columnspan = 4)
         self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
-        self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 4)
+        self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 5)
         self.counter=0
 
        
@@ -42,13 +42,13 @@ class ControladorTablero():
             self: Instancia acual.
 
         """
-        salida = ""
+        #salida = ""
         for x in range(self.vista.filas):
-            salida=salida+"\n"
+            #salida=salida+"\n"
             for y in range(self.vista.columnas):
                     self.tablero.tablero[x][y]=self.vista.tablero[x][y].get()
-                    salida=salida+" "+str(self.tablero.getValue(x,y))
-        print(self.tablero)
+                    #salida=salida+" "+str(self.tablero.getValue(x,y))
+        #print(self.tablero)
 
     def imprimirTablero(self):
         """Imprime el tablero
@@ -75,3 +75,5 @@ class ControladorTablero():
         self.tablero.evolucion()
         self.imprimirTablero()
         self.vista.imprimirTablero(self.tablero.tablero)
+        self.counter=self.counter+1
+        self.lbGeneraciones.config(text="Generaciones = "+str(self.counter))
