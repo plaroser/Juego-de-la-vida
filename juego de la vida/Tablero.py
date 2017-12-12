@@ -25,19 +25,59 @@ class Tablero(object):
         self.tablero =  [[False for x in range(filas)] for y in range(columnas)] 
         
     def activar(self,fila,columna):
+        """Activar
+
+        activa una casilla espacifica
+
+        Args:
+            self: Instancia actual
+            fila: Fila seleccionada
+            columna: Columna seleccionada 
+        """
         self.tablero[fila][columna] = Tablero.ACTIVA
     
     def desactivar(self,fila,columna):
+        """Desactivar
+
+        desactivar una casilla espacifica
+
+        Args:
+            self: Instancia actual
+            fila: Fila seleccionada
+            columna: Columna seleccionada 
+        """
         self.tablero[fila][columna] = Tablero.INACTIVA
         
         
         
         
     def posicionValida(self,x,y):
+        """Calcula si una posicion es valida
+
+        Comprueba que una casilla es existente
+
+        Args:
+            self: Instancia actual
+            x: Fila seleccionada
+            y: Columna seleccionada 
+
+        Returns: si la posicion es valida
+        """
         return ((x>=0) and (x<self.filas))and ((y>=0) and (y<self.columnas))
         
         
     def calcularNumeroVecinosVivos(self,fila,columna):
+        """Calcular el numero de vecinos vivos
+
+        activa una casilla espacifica
+
+        Args:
+            self: Instancia actual
+            fila: Fila seleccionada
+            columna: Columna seleccionada
+
+        Returns: Calculo del total de vecinos vivos
+        """
         contador = 0;
         for i in range(-1, 2):
             x = fila + i
@@ -51,9 +91,29 @@ class Tablero(object):
         return contador
     
     def getValue(self, fila, columna): 
+        """Devuelve el valor de una casilla
+
+
+        Args:
+            self: Instancia actual
+            fila: Fila seleccionada
+            columna: Columna seleccionada
+
+        Returns: Valor de la casilla seleccionada
+        """
         return self.tablero[fila][columna]     
      
     def calcularProximoEstado(self,fila,columna):
+        """Calcula el proximo estado de una casilla
+
+
+        Args:
+            self: Instancia actual
+            fila: Fila seleccionada
+            columna: Columna seleccionada
+
+        Returns: Calcula el siguiente estado de una casilla
+        """
         vecinosVivos = self.calcularNumeroVecinosVivos(fila, columna)
         res = False
         if (self.getValue(fila, columna) == Tablero.INACTIVA):
@@ -70,19 +130,32 @@ class Tablero(object):
         return res
  
     def evolucion(self):
+        """Calcular el siguiente estado
+
+        Calcula el siguiente estado del tablero
+
+        Args:
+            self: Instancia actual
+            fila: Fila seleccionada
+            columna: Columna seleccionada
+
+        """
         copia = [[self.tablero[x][y] for x in range(self.filas)] for y in range(self.columnas)]
         
         for i in range(len(self.tablero)):
             for j in range(len(self.tablero)):
                 self.tablero[i][j] = self.calcularProximoEstado(i,j)
-                #print((self.tablero))
-        
-        #self.tablero = copia;   
-
-    def evolucion2(self):
-        print(self.columnas);
+                 
         
     def __str__(self):
+        """Crea un string del tablero
+
+
+        Args:
+            self: Instancia actual
+
+        Returns: Calculo del tablero en String
+        """
         res = ""
         for i in range(len(self.tablero)):
             for j in range(len(self.tablero)):
