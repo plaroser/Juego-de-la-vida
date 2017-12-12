@@ -6,12 +6,13 @@ Created on 21 de nov. de 2017
 import VistaTablero
 import Tablero
 from tkinter import *
+import threading
 import time
-time.sleep(5) 
 
 class ControladorTablero():
     t = 0
     v=0
+
 
     def __init__(self, filas, columnas):
         """Constructor
@@ -26,11 +27,33 @@ class ControladorTablero():
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
         #==========Boton provisional==========
-        bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.siguienteEstado)
-        bIniciar.grid(row=filas+6,column=0, columnspan = 4)
+        self.bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.iniciar)
+        self.bIniciar.grid(row=filas+6,column=0, columnspan = 4)
+        self.bParar = Button(master=self.vista.getMaster(), text="Parar", command=self.parar,state=DISABLED)
+        self.bParar.grid(row=filas+7,column=0, columnspan = 4)
         self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
         self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 5)
         self.counter=0
+        self.continuar = False
+        self.t = threading.Thread(target=self.vivir)
+
+    def iniciar(self):
+        if not self.t.isAlive():
+            self.t.start()
+        self.bIniciar.config(state=DISABLED)
+        self.bParar.config(state="normal")
+        self.continuar=True
+
+    def vivir(self):
+        while True:
+            if self.continuar:
+                self.siguienteEstado()
+                time.sleep(1)
+
+    def parar(self):
+        self.continuar=False
+        self.bIniciar.config(state="normal")
+        self.bParar.config(state=DISABLED)
 
        
 

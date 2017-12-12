@@ -27,11 +27,7 @@ class VistaTablero(object):
                 self.casillas[x][y] = Checkbutton(master, text="", variable=self.tablero[x][y])
                 #print(str(Tablero.Tablero.tablero[x][y].get()))
                 self.casillas[x][y].grid(row=x,column=y)
-        self.bParar = Button(master, text="Parar")
-        self.bParar.grid(row=x+1,column=0, columnspan = 4)
-        self.bIniciar = Button(master, text="Iniciar")
-        self.bIniciar.grid(row=x+2,column=0, columnspan = 4)
-        
+
         lVivos = Label(master,text="Total vivos:")
         lVivos.grid(row=x+4,column=0, columnspan = 4)
         self.lbVivos = Label(master, text="0")
