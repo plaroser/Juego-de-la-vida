@@ -37,6 +37,14 @@ class ControladorTablero():
         self.t = threading.Thread(target=self.vivir)
 
     def iniciar(self):
+         """Inicia el juego
+
+        Inicia el ciclo del juego
+
+        Args:
+            self: Instancia actual
+            
+        """
         if not self.t.isAlive():
             self.t.start()
         self.bIniciar.config(state=DISABLED)
@@ -45,12 +53,28 @@ class ControladorTablero():
         self.vista.modoVista()
 
     def vivir(self):
+         """Ciclo de vida
+
+        Se va ejecutando segun lo que se ha calculado
+
+        Args:
+            self: Instancia actual
+           
+        """
         while True:
             if self.continuar:
                 self.siguienteEstado()
                 time.sleep(1)
 
     def parar(self):
+         """Para el ciclo
+
+        Para el ciclo de vida del juego
+
+        Args:
+            self: Instancia actual
+
+        """
         self.continuar=False
         self.bIniciar.config(state="normal")
         self.bParar.config(state=DISABLED)
