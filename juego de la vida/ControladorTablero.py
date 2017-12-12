@@ -26,7 +26,6 @@ class ControladorTablero():
         """
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
-        #==========Boton provisional==========
         self.bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.iniciar)
         self.bIniciar.grid(row=filas+6,column=0, columnspan = 4)
         self.bParar = Button(master=self.vista.getMaster(), text="Parar", command=self.parar,state=DISABLED)
@@ -43,6 +42,7 @@ class ControladorTablero():
         self.bIniciar.config(state=DISABLED)
         self.bParar.config(state="normal")
         self.continuar=True
+        self.vista.modoVista()
 
     def vivir(self):
         while True:
@@ -54,6 +54,7 @@ class ControladorTablero():
         self.continuar=False
         self.bIniciar.config(state="normal")
         self.bParar.config(state=DISABLED)
+        self.vista.modoEdicion()
 
        
 

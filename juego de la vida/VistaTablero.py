@@ -44,6 +44,15 @@ class VistaTablero(object):
                 #self.casillas[x][y].select()
                 self.setVivos()
     
+    def modoVista(self):
+        for x in range(self.filas):
+            for y in range(self.columnas):
+                self.casillas[x][y].config(state=DISABLED)
+
+    def modoEdicion(self):
+        for x in range(self.filas):
+            for y in range(self.columnas):
+                self.casillas[x][y].config(state="normal")
     
     def setVivos(self):
         contador = 0
