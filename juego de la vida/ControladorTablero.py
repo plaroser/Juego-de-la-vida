@@ -37,7 +37,7 @@ class ControladorTablero():
         self.t = threading.Thread(target=self.vivir)
 
     def iniciar(self):
-         """Inicia el juego
+        """Inicia el juego
 
         Inicia el ciclo del juego
 
@@ -53,7 +53,7 @@ class ControladorTablero():
         self.vista.modoVista()
 
     def vivir(self):
-         """Ciclo de vida
+        """Ciclo de vida
 
         Se va ejecutando segun lo que se ha calculado
 
@@ -67,7 +67,7 @@ class ControladorTablero():
                 time.sleep(1)
 
     def parar(self):
-         """Para el ciclo
+        """Para el ciclo
 
         Para el ciclo de vida del juego
 
