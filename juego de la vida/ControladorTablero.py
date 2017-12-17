@@ -8,6 +8,8 @@ import Tablero
 from tkinter import *
 import threading
 import time
+import pickle
+import random
 
 class ControladorTablero():
     t = 0
@@ -26,12 +28,18 @@ class ControladorTablero():
         """
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
+        self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
+        self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 5)
         self.bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.iniciar)
         self.bIniciar.grid(row=filas+6,column=0, columnspan = 4)
         self.bParar = Button(master=self.vista.getMaster(), text="Parar", command=self.parar,state=DISABLED)
         self.bParar.grid(row=filas+7,column=0, columnspan = 4)
-        self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
-        self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 5)
+        self.bCargar = Button(master=self.vista.getMaster(), text="Cargar",command=self.cargar)
+        self.bCargar.grid(row=filas+8,column=0, columnspan = 4)
+        self.bGuardar = Button(master=self.vista.getMaster(), text="Guardar",command=self.guardar)
+        self.bGuardar.grid(row=filas+9,column=0, columnspan = 4)
+        self.bAleatorio = Button(master=self.vista.getMaster(), text="Aleatorio",command=self.aleatorio)
+        self.bAleatorio.grid(row=filas+10,column=0, columnspan = 4)
         self.counter=0
         self.continuar = False
         self.t = threading.Thread(target=self.vivir)
@@ -48,9 +56,16 @@ class ControladorTablero():
         if not self.t.isAlive():
             self.t.start()
         self.bIniciar.config(state=DISABLED)
+        self.bGuardar.config(state=DISABLED)
+        self.bCargar.config(state=DISABLED)
+        self.bAleatorio.config(state=DISABLED)
         self.bParar.config(state="normal")
         self.continuar=True
         self.vista.modoVista()
+
+    def aleatorio(self):
+        self.tablero.tablero=  [[random.choice([True, False]) for x in range(self.vista.filas)] for y in range(self.vista.columnas)]
+        self.imprimirTablero()
 
     def vivir(self):
         """Ciclo de vida
@@ -77,10 +92,23 @@ class ControladorTablero():
         """
         self.continuar=False
         self.bIniciar.config(state="normal")
+        self.bCargar.config(state="normal")
+        self.bGuardar.config(state="normal")
+        self.bAleatorio.config(state="normal")
         self.bParar.config(state=DISABLED)
         self.vista.modoEdicion()
 
-       
+    def guardar(self):
+        self.leerTablero()
+        # Store data (serialize)
+        with open('tablero.spr', 'wb') as handle:
+            pickle.dump(self.tablero.tablero, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    def cargar(self):
+        # Load data (deserialize)
+        with open('tablero.spr', 'rb') as handle:
+            self.tablero.tablero = pickle.load(handle)
+        self.imprimirTablero()
 
     def leerTablero(self):
         """Lee el tablero
