@@ -30,8 +30,12 @@ class VistaTablero(object):
 
         lVivos = Label(master,text="Total vivos:")
         lVivos.grid(row=x+4,column=0, columnspan = 4)
+        lMuertos = Label(master,text="Total muertos:")
+        lMuertos.grid(row=x+5,column=0, columnspan = 4)
         self.lbVivos = Label(master, text="0")
         self.lbVivos.grid(row=x+4,column=4, columnspan = 4)
+        self.lMuertos = Label(master, text="0")
+        self.lMuertos.grid(row=x+5,column=4, columnspan = 4)
     
     def imprimirTablero(self,tablero):
         for x in range(self.filas):
@@ -56,11 +60,15 @@ class VistaTablero(object):
     
     def setVivos(self):
         contador = 0
+        contadormuertos = 0
         for x in range(self.filas):
             for y in range(self.columnas):
                 if self.tablero[x][y].get()==True:
                     contador=contador+1
+                else:
+                    contadormuertos=contadormuertos+1
         self.lbVivos.config(text=str(contador))
+        self.lMuertos.config(text=str(contadormuertos))
 
     def __init__(self, filas, columnas, tablero):
         '''

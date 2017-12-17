@@ -29,17 +29,22 @@ class ControladorTablero():
         self.tablero = Tablero.Tablero(filas, columnas);
         self.vista = VistaTablero.VistaTablero(filas, columnas,self.tablero);
         self.lbGeneraciones = Label(master=self.vista.getMaster(),text="Generaciones = 0")
-        self.lbGeneraciones.grid(row=filas+5,column=0, columnspan = 5)
+        self.lbGeneraciones.grid(row=filas+6,column=0, columnspan = 5)
+        self.textoSegundos = StringVar()
+        self.textSegundos = Entry(master=self.vista.getMaster(), width=5, textvariable=self.textoSegundos)
+        self.textSegundos.grid(row=filas+7,column=3, columnspan = 5)
+        self.lbSegundos = Label(master=self.vista.getMaster(),text="Segundos:")
+        self.lbSegundos.grid(row=filas+7,column=0, columnspan = 5)
         self.bIniciar = Button(master=self.vista.getMaster(), text="Continuar",command=self.iniciar)
-        self.bIniciar.grid(row=filas+6,column=0, columnspan = 4)
+        self.bIniciar.grid(row=filas+8,column=0, columnspan = 4)
         self.bParar = Button(master=self.vista.getMaster(), text="Parar", command=self.parar,state=DISABLED)
-        self.bParar.grid(row=filas+7,column=0, columnspan = 4)
+        self.bParar.grid(row=filas+9,column=0, columnspan = 4)
         self.bCargar = Button(master=self.vista.getMaster(), text="Cargar",command=self.cargar)
-        self.bCargar.grid(row=filas+8,column=0, columnspan = 4)
+        self.bCargar.grid(row=filas+10,column=0, columnspan = 4)
         self.bGuardar = Button(master=self.vista.getMaster(), text="Guardar",command=self.guardar)
-        self.bGuardar.grid(row=filas+9,column=0, columnspan = 4)
+        self.bGuardar.grid(row=filas+11,column=0, columnspan = 4)
         self.bAleatorio = Button(master=self.vista.getMaster(), text="Aleatorio",command=self.aleatorio)
-        self.bAleatorio.grid(row=filas+10,column=0, columnspan = 4)
+        self.bAleatorio.grid(row=filas+12,column=0, columnspan = 4)
         self.counter=0
         self.continuar = False
         self.t = threading.Thread(target=self.vivir)
@@ -59,6 +64,7 @@ class ControladorTablero():
         self.bGuardar.config(state=DISABLED)
         self.bCargar.config(state=DISABLED)
         self.bAleatorio.config(state=DISABLED)
+        self.textSegundos.config(state=DISABLED)
         self.bParar.config(state="normal")
         self.continuar=True
         self.vista.modoVista()
@@ -67,6 +73,18 @@ class ControladorTablero():
         self.tablero.tablero=  [[random.choice([True, False]) for x in range(self.vista.filas)] for y in range(self.vista.columnas)]
         self.imprimirTablero()
 
+    def validarSegundos(self, s):
+        segundos = 1
+        try:
+            segundos = int(s)
+        except ValueError:
+            segundos = int(1)
+
+        if(segundos<=1):
+            return int(1)
+        else:
+            return int(segundos)
+    
     def vivir(self):
         """Ciclo de vida
 
@@ -79,7 +97,12 @@ class ControladorTablero():
         while True:
             if self.continuar:
                 self.siguienteEstado()
-                time.sleep(1)
+                segundos = self.textoSegundos.get()
+                segundos = self.validarSegundos(segundos)
+                print(segundos)
+                time.sleep(segundos)
+                self.textoSegundos.set(str(segundos))
+
 
     def parar(self):
         """Para el ciclo
@@ -95,6 +118,7 @@ class ControladorTablero():
         self.bCargar.config(state="normal")
         self.bGuardar.config(state="normal")
         self.bAleatorio.config(state="normal")
+        self.textSegundos.config(state="normal")
         self.bParar.config(state=DISABLED)
         self.vista.modoEdicion()
 
